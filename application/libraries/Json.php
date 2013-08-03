@@ -5,23 +5,28 @@
  */
 class Json {
 
-	public function encode($data = array())
+	public function convert($data = array())
 	{
-		$data = $this->_convert_data_to_string($data);
+		return json_encode($this->convert_data($data));
+	}
+
+	public function output($data = array())
+	{
+		$json = $this->convert($data);
 		$CI =& get_instance();
 		$CI->output
 			->set_content_type('application/json')
-			->set_output(json_encode($data));
+			->set_output($json);
 	}
 
-	private function _convert_data_to_string($data)
+	private function convert_data($data)
 	{
 		if (is_object($data)) {
 			$data = (Array)$data;
 		}
 		if (is_array($data)) {
 			foreach ($data as &$val) {
-				$val = $this->_convert_data_to_string($val);
+				$val = $this->convert_data($val);
 			}
 			return $data;
 		} else if (is_bool($data)) {
