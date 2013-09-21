@@ -30,5 +30,24 @@ if (!function_exists('is_mobile'))
 	}
 }
 
+/**
+ * Debug dump
+ *
+ * @access	public
+ * @param	mixed
+ */
+if (!function_exists('debug_dump'))
+{
+	function debug_dump($val)
+	{
+		if (!is_production())
+		{
+			echo('<pre>');
+			var_dump($val);
+			echo('</pre>');
+		}
+	}
+}
+
 /* End of file universal_helper.php */
 /* Location: ./application/helpers/universal_helper.php */
