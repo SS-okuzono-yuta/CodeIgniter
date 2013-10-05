@@ -10,7 +10,7 @@ if (!function_exists('is_production'))
 {
 	function is_production()
 	{
-		return ('production' === ENVIRONMENT);
+		return preg_match('/production/', ENVIRONMENT);
 	}
 }
 

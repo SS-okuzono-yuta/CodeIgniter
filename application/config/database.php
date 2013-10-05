@@ -64,6 +64,14 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+$slave_group = 'slave';
+$slave_hosts = array(
+	'localhost'
+);
+
+$db['slave'] = $db[$active_group];
+$db['slave']['hostname'] = $slave_hosts[rand(0, count($slave_hosts) - 1)];
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
