@@ -1,0 +1,18 @@
+# Enable below if in maintenance.
+# SetEnv CI_IN_MAINTENANCE 1
+
+# Disable below if running production.
+# SetEnv CI_IN_DEVELOPMENT 1
+
+# Disable below if you don't want to show any error report.
+# SetEnv CI_DISABLE_ERROR_REPORTING 1
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteBase /
+    RewriteCond $1 !^(index\.php)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+</IfModule>
+

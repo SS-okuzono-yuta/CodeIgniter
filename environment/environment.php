@@ -13,23 +13,25 @@ require_once(__DIR__.'/locale.php');
  *
  * This can be set to anything, but default usage is:
  *
- *     development/*
+ *     development
  *     testing
  *     maintenance
- *     production/*
+ *     production
  *
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
 
-$in_maintenance = 0;
-
-if (!$in_maintenance) {
-	define('ENVIRONMENT', 'development');
-	// define('ENVIRONMENT', 'production');
-} else {
+if (getenv('CI_IN_MAINTENANCE')) {
 	define('ENVIRONMENT', 'maintenance');
+} else {
+	if (getenv('CI_IN_DEVELOPMENT')) {
+		define('ENVIRONMENT', 'development');
+	} else {
+		define('ENVIRONMENT', 'production');
+	}
 }
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -44,11 +46,14 @@ if (defined('ENVIRONMENT'))
 	switch (ENVIRONMENT)
 	{
 		case 'development':
-			error_reporting(E_ALL);
+			error_reporting(E_ALL | E_STRICT);
 		break;
 	
-		case 'testing':
 		case 'production':
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		break;
+
+		case 'testing':
 			error_reporting(0);
 		break;
 
@@ -60,4 +65,6 @@ if (defined('ENVIRONMENT'))
 			exit('The application environment is not set correctly.');
 	}
 }
-
+if (getenv('CI_DISABLE_ERROR_REPORTING')) {
+	error_reporting(0);
+}
