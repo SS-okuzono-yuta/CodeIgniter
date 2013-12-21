@@ -58,8 +58,7 @@ if (defined('ENVIRONMENT'))
 		break;
 
 		case 'maintenance':
-			header('Location: public/error.php');
-			exit;
+			exit('The application is in maintenance.');
 
 		default:
 			exit('The application environment is not set correctly.');
