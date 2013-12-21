@@ -22,14 +22,11 @@ require_once(__DIR__.'/locale.php');
  *
  */
 
-$in_maintenance = 1;
+$in_maintenance = 0;
 
 if (!$in_maintenance) {
-	if (preg_match('/d\.eure\.jp/', $_SERVER['SERVER_NAME'])) {
-		define('ENVIRONMENT', 'development');
-	} else {
-		define('ENVIRONMENT', 'production');
-	}
+	define('ENVIRONMENT', 'development');
+	// define('ENVIRONMENT', 'production');
 } else {
 	define('ENVIRONMENT', 'maintenance');
 }
