@@ -8,6 +8,12 @@ class MY_Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		set_exception_handler(array($this, 'exception_handler'));
+	}
+
+	public function exception_handler(Exception $e)
+	{
+		debug_log("#{$e->getCode()}: {$e->getMessage()}", 'exception');
 	}
 
 }
