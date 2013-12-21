@@ -22,7 +22,7 @@ require_once(__DIR__.'/locale.php');
  *
  */
 
-$in_maintenance = 0;
+$in_maintenance = 1;
 
 if (!$in_maintenance) {
 	if (preg_match('/d\.eure\.jp/', $_SERVER['SERVER_NAME'])) {
@@ -56,7 +56,7 @@ if (defined('ENVIRONMENT'))
 		break;
 
 		case 'maintenance':
-			header('Location: public/error_503.html');
+			header('Location: public/error.php');
 			exit;
 
 		default:
